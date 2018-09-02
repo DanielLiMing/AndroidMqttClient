@@ -12,7 +12,8 @@ import org.greenrobot.eventbus.Subscribe;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static final String URL = "tcp://23.105.211.20:1883";
+    //public static final String URL = "tcp://23.105.211.20:1883";
+    public static final String URL = "tcp://192.168.169.101:1883";
 
     private String userName = "userName";
 
@@ -48,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         MqttManager.getInstance().publish("test", 2, "hello".getBytes());
+                        Log.i(TAG, "run: publish");
                     }
                 }).start();
             }
@@ -59,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         MqttManager.getInstance().subscribe("test", 2);
+                        Log.i(TAG, "run: subcribe");
                     }
                 }).start();
             }
@@ -70,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         try {
-
+                            Log.i(TAG, "run: connected");
                             MqttManager.getInstance().disConnect();
                         } catch (MqttException e) {
 
